@@ -2,6 +2,8 @@ import { useState } from "react";
 import "./App.scss";
 import Button from "./components/Button";
 import CheckBox from "./components/CheckBox";
+import styled from "styled-components";
+import StyledButton from "./components/StyledButton";
 
 function App() {
   // scss 사용
@@ -15,6 +17,19 @@ function App() {
     // input type이 checkbox인 경우 e.target.checked를 하면 true인지 false값을 반환한다.
     setChecked(e.target.checked);
   };
+
+  const Circle = styled.div`
+    width: 5rem;
+    height: 5rem;
+    background: ${(props) => props.color || "black"};
+    border-radius: 50%;
+    ${(props) =>
+      props.huge &&
+      `
+        width: 10rem;
+        height: 10rem;
+      `}
+  `;
 
   return (
     <div className="App">
@@ -73,6 +88,10 @@ function App() {
       <CheckBox checked={checked} onChange={onChange}>
         다음 약관에 모두 동의
       </CheckBox>
+
+      {/* styled-components 사용 */}
+      <Circle color="blue" huge />
+      <StyledButton>버튼입니다.</StyledButton>
     </div>
   );
 }
