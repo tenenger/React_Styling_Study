@@ -1,0 +1,83 @@
+$blue: #228be6; // 변수선언 가능
+$gray: #495057;
+$pink: #f06595;
+
+@mixin mixin-color($color) {
+  background-color: $color;
+  // Button:hover 대신 Button 안에 &:hover 및 active를 사용한다.
+  &:hover {
+    // lighten은 밝게 만들어 주므로, $blue를 10% 밝게 만들어 준다.
+    background-color: lighten($color, 10%);
+  }
+
+  &:active {
+    // darken은 어둡게 만들어 주므로, $blue를 10% 어둡게 만들어 준다.
+    background-color: darken($color, 10%);
+  }
+  &.outline {
+    color: $color;
+    background: none;
+    border: 1px solid $color;
+    &:hover {
+      background: $color;
+      color: white;
+    }
+  }
+}
+
+.Button {
+  display: inline-flex;
+  color: white;
+  font-weight: bold;
+  outline: none;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+
+  height: 2.25rem;
+  padding: 0 1rem;
+  font-size: 1rem;
+
+  background-color: $blue;
+
+  &.large {
+    height: 3rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    font-size: 1.25rem;
+  }
+  &.medium {
+    height: 2.25rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    font-size: 1rem;
+  }
+  &.small {
+    height: 1.75rem;
+    font-size: 0.875rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  &.blue {
+    @include mixin-color($blue);
+  }
+  &.gray {
+    @include mixin-color($gray);
+  }
+  &.pink {
+    @include mixin-color($pink);
+  }
+
+  & + & {
+    margin-left: 1rem;
+  }
+  &.fullWidth {
+    width: 100%;
+    & + & {
+      margin-left: 0;
+      margin-top: 1rem;
+    }
+  }
+}
