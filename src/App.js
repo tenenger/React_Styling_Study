@@ -4,6 +4,7 @@ import Button from "./components/Button";
 import CheckBox from "./components/CheckBox";
 import styled from "styled-components";
 import StyledButton from "./components/StyledButton";
+import Dialog from "./components/Dialog";
 
 function App() {
   // scss 사용
@@ -18,6 +19,7 @@ function App() {
     setChecked(e.target.checked);
   };
 
+  // styled-components 사용
   const Circle = styled.div`
     width: 5rem;
     height: 5rem;
@@ -30,6 +32,19 @@ function App() {
         height: 10rem;
       `}
   `;
+
+  const [dialog, setDialog] = useState(false);
+  const onDialogClick = () => {
+    setDialog(true);
+  };
+  const onConfirm = () => {
+    console.log("확인");
+    setDialog(false);
+  };
+  const onCancel = () => {
+    console.log("취소");
+    setDialog(false);
+  };
 
   return (
     <div className="App">
@@ -91,7 +106,17 @@ function App() {
 
       {/* styled-components 사용 */}
       <Circle color="blue" huge />
-      <StyledButton>버튼입니다.</StyledButton>
+      <StyledButton onClick={onDialogClick}>버튼입니다.</StyledButton>
+
+      <Dialog
+        title="정말로 삭제하시겠습니까?"
+        onDialogClick={onDialogClick}
+        onConfirm={onConfirm}
+        onCancel={onCancel}
+        visible={dialog}
+      >
+        데이터를 정말로 삭제하시겠습니까?
+      </Dialog>
     </div>
   );
 }
